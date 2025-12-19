@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Projet_Chess_db.Views.GameView">
+
+    <StackPanel Spacing="10" Margin="20">
+        
+        <TextBlock Text="Encodage des Parties" 
+                   FontSize="24" 
+                   FontWeight="Bold"/>
+
+        <!-- Démarrer une nouvelle partie -->
+        <Border BorderBrush="Gray" 
+                BorderThickness="1" 
+                Padding="10">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Nouvelle Partie" FontWeight="Bold" FontSize="16"/>
+                
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Compétition:" VerticalAlignment="Center" Width="100"/>
+                    <ComboBox x:Name="CmbCompetitions" Width="250" DisplayMemberBinding="{Binding Name}"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Joueur Blanc:" VerticalAlignment="Center" Width="100"/>
+                    <ComboBox x:Name="CmbWhitePlayer" Width="250" DisplayMemberBinding="{Binding FullName}"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Joueur Noir:" VerticalAlignment="Center" Width="100"/>
+                    <ComboBox x:Name="CmbBlackPlayer" Width="250" DisplayMemberBinding="{Binding FullName}"/>
+                </StackPanel>
+                
+                <Button Content="Démarrer la partie" Click="StartGame" Width="150" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Partie en cours -->
+        <Border x:Name="GamePanel" 
+                BorderBrush="Gray" 
+                BorderThickness="1" 
+                Padding="10" 
+                IsVisible="False">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Partie en cours" FontWeight="Bold" FontSize="16"/>
+                
+                <TextBlock x:Name="TxtGameInfo" Text="" TextWrapping="Wrap"/>
+                
+                <!-- Ajouter un coup -->
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Coup:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TxtMoveNotation" Width="100" Watermark="e4, Nf3..."/>
+                    <Button Content="Ajouter coup" Click="AddMove"/>
+                </StackPanel>
+                
+                <!-- Liste des coups -->
+                <TextBlock Text="Coups joués:" FontWeight="Bold"/>
+                <ScrollViewer Height="150" BorderBrush="Gray" BorderThickness="1">
+                    <TextBlock x:Name="TxtMovesList" TextWrapping="Wrap" Margin="5"/>
+                </ScrollViewer>
+                
+                <!-- Terminer la partie -->
+                <TextBlock Text="Résultat:" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="Victoire Blancs (1-0)" Click="FinishGameWhiteWin" Width="150"/>
+                    <Button Content="Match Nul (1/2-1/2)" Click="FinishGameDraw" Width="150"/>
+                    <Button Content="Victoire Noirs (0-1)" Click="FinishGameBlackWin" Width="150"/>
+                </StackPanel>
+                
+                <Button Content="Annuler la partie" Click="CancelGame" Width="150" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Historique des parties -->
+        <TextBlock Text="Parties récentes" FontWeight="Bold" FontSize="16" Margin="0,20,0,0"/>
+        <ListBox x:Name="GamesListBox" MinHeight="300" MaxHeight="600">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="8" Margin="2" BorderBrush="Gray" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock FontSize="13" FontWeight="Bold">
+                                <Run Text="Partie #"/>
+                                <Run Text="{Binding Id}"/>
+                                <Run Text=" - "/>
+                                <Run Text="{Binding GameDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12" Foreground="Gray">
+                                <Run Text="Compétition: "/>
+                                <Run Text="{Binding CompetitionName}"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12">
+                                <Run Text="Blancs: "/>
+                                <Run Text="{Binding WhitePlayerName}" FontWeight="Bold"/>
+                                <Run Text=" (ELO: "/>
+                                <Run Text="{Binding WhiteElo}"/>
+                                <Run Text=")"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12">
+                                <Run Text="Noirs: "/>
+                                <Run Text="{Binding BlackPlayerName}" FontWeight="Bold"/>
+                                <Run Text=" (ELO: "/>
+                                <Run Text="{Binding BlackElo}"/>
+                                <Run Text=")"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12">
+                                <Run Text="Résultat: "/>
+                                <Run Text="{Binding Result}" FontWeight="Bold"/>
+                            </TextBlock>
+                            <TextBlock FontSize="11" Foreground="Gray">
+                                <Run Text="Nombre de coups: "/>
+                                <Run Text="{Binding MovesCount}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</UserControl>

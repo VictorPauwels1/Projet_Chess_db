@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Projet_Chess_db.Views.AddCompetitionDialog"
+        Title="Nouvelle Compétition"
+        Width="450" Height="500"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+    <StackPanel Margin="20" Spacing="15">
+        
+        <TextBlock Text="Nouvelle Compétition" 
+                   FontSize="20" 
+                   FontWeight="Bold"/>
+
+        <!-- Nom -->
+        <StackPanel>
+            <TextBlock Text="Nom de la compétition *"/>
+            <TextBox x:Name="TxtName" Watermark="Ex: Championnat de Belgique 2025"/>
+        </StackPanel>
+
+        <!-- Lieu -->
+        <StackPanel>
+            <TextBlock Text="Lieu *"/>
+            <TextBox x:Name="TxtLocation" Watermark="Ex: Bruxelles"/>
+        </StackPanel>
+
+        <!-- Date début -->
+        <StackPanel>
+            <TextBlock Text="Date de début *"/>
+            <DatePicker x:Name="DateStart"/>
+        </StackPanel>
+
+        <!-- Date fin -->
+        <StackPanel>
+            <TextBlock Text="Date de fin *"/>
+            <DatePicker x:Name="DateEnd"/>
+        </StackPanel>
+
+        <!-- Nombre max participants -->
+        <StackPanel>
+            <TextBlock Text="Nombre maximum de participants (0 = illimité)"/>
+            <NumericUpDown x:Name="NumMaxParticipants" 
+                           Value="0" 
+                           Minimum="0" 
+                           Maximum="500"
+                           Increment="1"/>
+        </StackPanel>
+
+        <!-- Boutons -->
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Spacing="10" 
+                    Margin="0,20,0,0">
+            <Button Content="Annuler" 
+                    Width="100"
+                    Click="Cancel"/>
+            <Button Content="Créer" 
+                    Width="100"
+                    Click="Save"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

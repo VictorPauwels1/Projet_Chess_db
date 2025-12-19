@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Projet_Chess_db.Views.AddPlayerDialog"
+        Title="Ajouter un joueur"
+        Width="450" Height="500"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+    <StackPanel Margin="20" Spacing="15">
+        
+        <TextBlock Text="Nouveau Joueur" 
+                   FontSize="20" 
+                   FontWeight="Bold"/>
+
+        <StackPanel>
+            <TextBlock Text="Prénom *"/>
+            <TextBox x:Name="TxtFirstName" Watermark="Entrez le prénom"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Nom *"/>
+            <TextBox x:Name="TxtLastName" Watermark="Entrez le nom"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Date de naissance *"/>
+            <DatePicker x:Name="DateBirth"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Email"/>
+            <TextBox x:Name="TxtEmail" Watermark="exemple@email.com"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Téléphone"/>
+            <TextBox x:Name="TxtPhone" Watermark="+32 XXX XX XX XX"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="ELO initial"/>
+            <NumericUpDown x:Name="NumElo" 
+                           Value="1200" 
+                           Minimum="0" 
+                           Maximum="3000"
+                           Increment="10"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Spacing="10" 
+                    Margin="0,20,0,0">
+            <Button Content="Annuler" 
+                    Width="100"
+                    Click="Cancel"/>
+            <Button Content="Enregistrer" 
+                    Width="100"
+                    Click="Save"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

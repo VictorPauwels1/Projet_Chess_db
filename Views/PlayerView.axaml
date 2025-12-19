@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Projet_Chess_db.Views.PlayerView">
+
+    <StackPanel Spacing="10" Margin="20">
+        
+        <TextBlock Text="Gestion des Joueurs" 
+                   FontSize="24" 
+                   FontWeight="Bold"/>
+
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button Content="Ajouter un joueur" Click="AddPlayer"/>
+            <Button Content="Modifier sélectionné" Click="EditPlayer"/>
+            <Button Content="Supprimer sélectionné" Click="DeletePlayer"/>
+            <Button Content="Rafraîchir" Click="RefreshList"/>
+        </StackPanel>
+
+        <!-- Liste simple avec ListBox -->
+        <ListBox x:Name="PlayerListBox"
+                 Height="400"
+                 SelectionChanged="PlayerListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="16">
+                            <Run Text="[ID "/>
+                            <Run Text="{Binding Id}"/>
+                            <Run Text="] "/>
+                            <Run Text="{Binding FullName}"/>
+                        </TextBlock>
+                        <TextBlock Text="{Binding EloRating, StringFormat='ELO: {0}'}" FontSize="12" Foreground="Gray"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Détails -->
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Background="#F5F5F5">
+            <TextBlock x:Name="TxtDetails" 
+                       Text="Sélectionnez un joueur"
+                       TextWrapping="Wrap"/>
+        </Border>
+    </StackPanel>
+</UserControl>

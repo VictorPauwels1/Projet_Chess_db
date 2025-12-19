@@ -1,0 +1,154 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Projet_Chess_db.Views.StatisticsView">
+
+    <Grid ColumnDefinitions="400,*" Margin="20">
+        
+        
+        <StackPanel Grid.Column="0" Spacing="10" Margin="0,0,20,0">
+            
+            <TextBlock Text="Statistiques" 
+                       FontSize="24" 
+                       FontWeight="Bold"/>
+
+            <!-- Statistiques globales -->
+            <Border BorderBrush="Gray" 
+                    BorderThickness="1" 
+                    Padding="15">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Vue d'ensemble" 
+                               FontWeight="Bold" 
+                               FontSize="16"/>
+                    <TextBlock x:Name="TxtGlobalStats" 
+                               TextWrapping="Wrap"
+                               FontSize="13"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Classement par ELO -->
+            <Border BorderBrush="Gray" BorderThickness="1" Padding="5">
+                <StackPanel>
+                    <TextBlock Text="Classement par ELO" 
+                               FontWeight="Bold" 
+                               Margin="5"
+                               FontSize="14"/>
+                    <ListBox x:Name="RankingListBox"
+                             Height="450"
+                             SelectionChanged="RankingListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="8" Margin="2">
+                                    <Grid ColumnDefinitions="30,*,60">
+                                        <TextBlock Grid.Column="0" 
+                                                   Text="{Binding Rank}" 
+                                                   FontWeight="Bold"
+                                                   FontSize="16"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Player.FullName}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="14"/>
+                                            <TextBlock FontSize="11" Foreground="Gray">
+                                                <Run Text="ID: "/>
+                                                <Run Text="{Binding Player.Id}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" 
+                                                   Text="{Binding Player.EloRating}" 
+                                                   FontWeight="Bold"
+                                                   FontSize="16"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Spacing="15">
+                
+                <TextBlock x:Name="TxtPlayerName" 
+                           Text="Sélectionnez un joueur" 
+                           FontSize="20" 
+                           FontWeight="Bold"/>
+
+                <!-- Statistiques générales -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Statistiques générales" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <TextBlock x:Name="TxtPlayerStats" 
+                                   TextWrapping="Wrap"
+                                   FontSize="13"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Performance -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Performance" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <TextBlock x:Name="TxtPerformance" 
+                                   TextWrapping="Wrap"
+                                   FontSize="13"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Dernières parties -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Dernières parties" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <ListBox x:Name="RecentGamesListBox" 
+                                 Height="300"
+                                 BorderBrush="Gray"
+                                 BorderThickness="1">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="8" Margin="2">
+                                        <StackPanel>
+                                            <TextBlock FontSize="12" Foreground="Gray">
+                                                <Run Text="{Binding GameDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="13" TextWrapping="Wrap">
+                                                <Run Text="{Binding Description}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" FontWeight="Bold">
+                                                <Run Text="Résultat: "/>
+                                                <Run Text="{Binding ResultText}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="11" Foreground="Gray">
+                                                <Run Text="ELO: "/>
+                                                <Run Text="{Binding EloBefore}"/>
+                                                <Run Text=" → "/>
+                                                <Run Text="{Binding EloAfter}"/>
+                                                <Run Text=" ("/>
+                                                <Run Text="{Binding EloChange}"/>
+                                                <Run Text=")"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

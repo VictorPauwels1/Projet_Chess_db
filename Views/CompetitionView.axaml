@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Projet_Chess_db.Views.CompetitionView">
+
+    <Grid ColumnDefinitions="400,*" Margin="20">
+        
+        
+        <StackPanel Grid.Column="0" Spacing="10" Margin="0,0,20,0">
+            
+            <TextBlock Text="Gestion des Compétitions" 
+                       FontSize="24" 
+                       FontWeight="Bold"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="Nouvelle" Click="AddCompetition" Width="120"/>
+                <Button Content="Inscrire joueur" Click="RegisterPlayer" Width="140"/>
+            </StackPanel>
+
+            <!-- Liste des compétitions -->
+            <Border BorderBrush="Gray" BorderThickness="1" Padding="5">
+                <StackPanel>
+                    <TextBlock Text="Compétitions" FontWeight="Bold" Margin="5"/>
+                    <ListBox x:Name="CompetitionListBox"
+                             Height="550"
+                             SelectionChanged="CompetitionListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="5" Margin="2">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   FontWeight="Bold" 
+                                                   FontSize="15"/>
+                                        <TextBlock FontSize="12">
+                                            <Run Text="Lieu: "/>
+                                            <Run Text="{Binding Location}"/>
+                                        </TextBlock>
+                                        <TextBlock FontSize="11" Foreground="Gray">
+                                            <Run Text="Date: "/>
+                                            <Run Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                        </TextBlock>
+                                        <TextBlock FontSize="11">
+                                            <Run Text="Participants: "/>
+                                            <Run Text="{Binding RegisteredPlayerIds.Count}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Spacing="15">
+                
+                <TextBlock Text="Détails de la compétition" 
+                           FontSize="20" 
+                           FontWeight="Bold"/>
+
+                <!-- Informations générales -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Informations" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <TextBlock x:Name="TxtCompDetails" 
+                                   Text="Sélectionnez une compétition"
+                                   TextWrapping="Wrap"
+                                   FontSize="13"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Participants -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Participants inscrits" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <ListBox x:Name="ParticipantListBox" 
+                                 Height="150"
+                                 BorderBrush="Gray"
+                                 BorderThickness="1"
+                                 SelectionMode="Single">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Padding="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+
+                <!-- Parties jouées -->
+                <Border BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Padding="15">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Parties jouées" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                        <ListBox x:Name="GamesListBox" 
+                                 Height="250"
+                                 BorderBrush="Gray"
+                                 BorderThickness="1"
+                                 SelectionMode="Single">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="8" Margin="2">
+                                        <StackPanel>
+                                            <TextBlock FontSize="13" FontWeight="Bold">
+                                                <Run Text="Partie #"/>
+                                                <Run Text="{Binding Id}"/>
+                                                <Run Text=" - "/>
+                                                <Run Text="{Binding GameDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12">
+                                                <Run Text="Blancs: "/>
+                                                <Run Text="{Binding WhitePlayerName}" FontWeight="Bold"/>
+                                                <Run Text=" (ELO: "/>
+                                                <Run Text="{Binding WhiteElo}"/>
+                                                <Run Text=")"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12">
+                                                <Run Text="Noirs: "/>
+                                                <Run Text="{Binding BlackPlayerName}" FontWeight="Bold"/>
+                                                <Run Text=" (ELO: "/>
+                                                <Run Text="{Binding BlackElo}"/>
+                                                <Run Text=")"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12">
+                                                <Run Text="Résultat: "/>
+                                                <Run Text="{Binding Result}" FontWeight="Bold"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="11" Foreground="Gray">
+                                                <Run Text="Coups joués: "/>
+                                                <Run Text="{Binding MovesCount}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>
